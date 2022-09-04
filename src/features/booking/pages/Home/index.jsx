@@ -33,7 +33,7 @@ function Home() {
 console.log(config);
 
   return (
-    <div>
+    <div style={{backgroundColor: "#888", paddingBottom: 40}}>
       <h1 style={{ textAlign: "center", fontSize: 40 }}>Danh sách phim</h1>
       <MovieList />
       <Pagination
