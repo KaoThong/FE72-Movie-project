@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 const rootReducer = combineReducers({
   booking: bookingReducer,
   auth: authReducer,
+  
 });
 
 // middleware: lưu trong những action đc gửi lên store

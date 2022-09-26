@@ -67,73 +67,85 @@ function Signup() {
   console.log(formik.errors);
 
   return (
-    <div className={style.container}>
-      <h2 className={style.content}>Sign Up</h2>
-      <form onSubmit={formik.handleSubmit} className={style.form}>
-        <Input
-          name="taiKhoan"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={style.title}
-          type="text"
-          placeholder="Username"
-        ></Input>
-        {formik.touched.taiKhoan && formik.errors.taiKhoan && (
-          <p className={style.errorText}>{formik.errors.taiKhoan}</p>
-        )}
+    <div className={style.signup}>
+      <span className={style.logo}>
+        <img className={style.icon} src=".././logo.ico" alt="#" />
+        <span className={style.text}>CYBERMOVIE</span>
+      </span>
+      <div className={style.container}>
+        <h2 className={style.content}>Sign up</h2>
+        <form onSubmit={formik.handleSubmit} className={style.form}>
+          <p className={style.loginInfo}>Username</p>
+          <Input
+            name="taiKhoan"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className={style.title}
+            type="text"
+            placeholder="abc123"
+          ></Input>
+          {formik.touched.taiKhoan && formik.errors.taiKhoan && (
+            <p className={style.errorText}>{formik.errors.taiKhoan}</p>
+          )}
+          <p className={style.loginInfo}>Fullname</p>
+          <Input
+            name="hoTen"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className={style.title}
+            type="text"
+            placeholder="Cao Văn Thông"
+          ></Input>
+          {formik.touched.hoTen && formik.errors.hoTen && (
+            <p className={style.errorText}>{formik.errors.hoTen}</p>
+          )}
+          <p className={style.loginInfo}>Password</p>
+          <Input
+            name="matKhau"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className={style.title}
+            type="password"
+            placeholder="********"
+          ></Input>
+          {formik.touched.matKhau && formik.errors.matKhau && (
+            <p className={style.errorText}>{formik.errors.matKhau}</p>
+          )}
+          <p className={style.loginInfo}>E-Mail</p>
+          <Input
+            name="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className={style.title}
+            type="email"
+            placeholder="abc@123"
+          ></Input>
+          {formik.touched.email && formik.errors.email && (
+            <p className={style.errorText}>{formik.errors.email}</p>
+          )}
+          <p className={style.loginInfo}>Phone</p>
+          <Input
+            name="soDt"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className={style.title}
+            type="text"
+            placeholder="Phone number"
+          ></Input>
+          {formik.touched.soDt && formik.errors.soDt && (
+            <p className={style.errorText}>{formik.errors.soDt}</p>
+          )}
 
-        <Input
-          name="hoTen"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={style.title}
-          type="text"
-          placeholder="Fullname"
-        ></Input>
-        {formik.touched.hoTen && formik.errors.hoTen && (
-          <p className={style.errorText}>{formik.errors.hoTen}</p>
-        )}
-
-        <Input
-          name="matKhau"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={style.title}
-          type="password"
-          placeholder="Password"
-        ></Input>
-        {formik.touched.matKhau && formik.errors.matKhau && (
-          <p className={style.errorText}>{formik.errors.matKhau}</p>
-        )}
-
-        <Input
-          name="email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={style.title}
-          type="email"
-          placeholder="Email"
-        ></Input>
-        {formik.touched.email && formik.errors.email && (
-          <p className={style.errorText}>{formik.errors.email}</p>
-        )}
-
-        <Input
-          name="soDt"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={style.title}
-          type="text"
-          placeholder="Phone number"
-        ></Input>
-        {formik.touched.soDt && formik.errors.soDt && (
-          <p className={style.errorText}>{formik.errors.soDt}</p>
-        )}
-
-        <Button className={style.btn} type="primary" htmlType="submit" loading={isLoading}>
-          Submit
-        </Button>
-      </form>
+          <Button
+            className={style.btn}
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+          >
+            Submit
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }

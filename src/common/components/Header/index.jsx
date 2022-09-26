@@ -3,10 +3,11 @@ import styles from "./style.module.css";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_PROFILE } from "features/authentication/action";
+import MovieList from "features/booking/components/MovieList";
 
 function Header() {
   const history = useHistory();
-  const userProfile = useSelector((state) => state.auth.profile);
+  const userProfile = JSON.parse(localStorage.getItem("userInfo"));
 
   const goToHome = () => {
     history.push("/");
@@ -17,32 +18,38 @@ function Header() {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
+    localStorage.removeItem("userInfo");
     dispatch({
       type: SET_PROFILE,
       payload: null,
     });
+    window.location.reload();
     goToHome();
-  }
+  };
 
   const renderUserInfo = () => {
     if (userProfile) {
       return (
         <>
-        <NavLink activeClassName={styles.active} to="/" exact>
-          Hi, {userProfile.hoTen}
-        </NavLink>
-        <a href="#" onClick={handleLogout}>Log out</a>
+          <NavLink activeClassName={styles.active} to="/" exact>
+            <i class="fa-regular fa-user"></i> {userProfile.hoTen}
+          </NavLink>
+          <a className={styles.looOut} href="#" onClick={handleLogout}>
+            <button className={styles.btn}>
+              Log out <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+          </a>
         </>
       );
     }
     return (
       <>
-       <NavLink activeClassName={styles.active} to="/signin">
-        Sign in
-      </NavLink>
-      <NavLink activeClassName={styles.active} to="/signup">
-        Sign up
-      </NavLink>
+        <NavLink activeClassName={styles.active} to="/signin">
+          Sign in
+        </NavLink>
+        <NavLink activeClassName={styles.active} to="/signup">
+          Sign up
+        </NavLink>
       </>
     );
   };
@@ -50,18 +57,22 @@ function Header() {
   return (
     <div className={styles.header}>
       <span onClick={goToHome} className={styles.logo}>
-        CyberMovive
+        <img className={styles.icon} src=".././logo.ico" alt="#" />
+        <span className={styles.title}>CYBERMOVIE</span>
       </span>
+      <div className={styles.featured}>
+        <a href="#movieList" className={styles.item}>
+          Lịch chiếu
+        </a>
+        <a className={styles.item}>Cụm rạp</a>
+        <a className={styles.item}>Tin tức</a>
+      </div>
       <nav className={styles.navbar}>
-        <NavLink activeClassName={styles.active} to="/" exact>
+        {/* <NavLink activeClassName={styles.active} to="/" exact>
           Home
-        </NavLink>
-        <NavLink activeClassName={styles.active} to="/movies">
-          Movie
-        </NavLink>
+        </NavLink> */}
 
         {renderUserInfo()}
-        
       </nav>
     </div>
   );

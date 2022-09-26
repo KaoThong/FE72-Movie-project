@@ -6,19 +6,21 @@ import * as yup from "yup";
 import FormItem from "antd/es/form/FormItem";
 import instance from "api/instance";
 import { useDispatch } from "react-redux";
-import { fetchSignInACtion, SET_PROFILE } from "features/authentication/action";
-
+import { fetchSignInAction, SET_PROFILE } from "features/authentication/action";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const schema = yup.object({
-  taiKhoan: yup.string().required("* Vui lòng nhập tài khoản"),
+  taiKhoan: yup.string().required("* Please enter your account"),
   matKhau: yup
     .string()
-    .required("* Vui lòng nhập mật khẩu")
-    .min(8, "* Mật khẩu phải từ 8 - 16 kí tự"),
+    .required("* Please enter your password")
+    .min(8, "* Password must be between 8-16 characters"),
 });
 
 function Signin() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const formik = useFormik({
     initialValues: {
@@ -26,64 +28,61 @@ function Signin() {
       matKhau: "",
     },
     onSubmit: async (values) => {
-      const res = await dispatch(fetchSignInACtion(values, setIsLoading));
+      const res = await dispatch(fetchSignInAction(values, setIsLoading));
+      if (res) window.location.reload();
     },
     validationSchema: schema,
     validateOnChange: false,
   });
 
-  // const signIn = async (user) => {
-  //   try {
-  //     // setIsLoading(true);
-  //     const res = await instance.request({
-  //       url: "/api/QuanLyNguoiDung/DangNhap",
-  //       method: "POST",
-  //       data: user,
-  //     });
-
-  //     localStorage.setItem("token", res.data.content.accessToken);
-  //     dispatch({type: SET_PROFILE, payload: res.data.content})
-  //     console.log(res.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   } 
-  //   // finally {
-  //   //   setIsLoading(false);
-  //   // }
-  // };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) history.goBack("/home");
+  }, []);
 
   return (
-    <div className={style.container}>
-      <h2 className={style.content}>Sign In</h2>
-      <form onSubmit={formik.handleSubmit} className={style.form}>
-        <Input
-          name="taiKhoan"
-          className={style.title}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          type="text"
-          placeholder="Username"
-        ></Input>
-        {formik.touched.taiKhoan && formik.errors.taiKhoan && (
-          <p className={style.errorText}>{formik.errors.taiKhoan}</p>
-        )}
+    <div className={style.signin}>
+      <span className={style.logo}>
+        <img className={style.icon} src=".././logo.ico" alt="#" />
+        <span className={style.text}>CYBERMOVIE</span>
+      </span>
+      <div className={style.container}>
+        <h2 className={style.content}>Sign in to your account!</h2>
+        <form onSubmit={formik.handleSubmit} className={style.form}>
+          <p className={style.loginInfo}>Username</p>
+          <Input
+            name="taiKhoan"
+            className={style.title}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            type="text"
+            placeholder="abc123"
+          ></Input>
+          {formik.touched.taiKhoan && formik.errors.taiKhoan && (
+            <p className={style.errorText}>{formik.errors.taiKhoan}</p>
+          )}
 
-        <Input
-          name="matKhau"
-          className={style.title}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          type="password"
-          placeholder="Password"
-        ></Input>
-        {formik.touched.matKhau && formik.errors.matKhau && (
-          <p className={style.errorText}>{formik.errors.matKhau}</p>
-        )}
-
-        <Button className={style.btn} type="primary" htmlType="submit">
-          Sign in
-        </Button>
-      </form>
+          <p className={style.loginInfo}>Password</p>
+          <Input
+            name="matKhau"
+            className={style.title}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            type="password"
+            placeholder="*******"
+          ></Input>
+          {formik.touched.matKhau && formik.errors.matKhau && (
+            <p className={style.errorText}>{formik.errors.matKhau}</p>
+          )}
+          <p className={style.forgotPW}>Forgot password?</p>
+          <Button className={style.btn} htmlType="submit">
+            Sign in
+          </Button>
+          <p className={style.requestSU}>
+            Please! Sign up an account if your already have one!
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

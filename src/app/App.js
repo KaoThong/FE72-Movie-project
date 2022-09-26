@@ -1,5 +1,6 @@
 import PageNotFound from "common/components/404";
 import Header from "common/components/Header";
+import Footer from "common/components/Footer/index";
 import { fetchProfileAction } from "features/authentication/action";
 // import Signin from "features/authentication/page/Signin";
 // import Signup from "features/authentication/page/Signup";
@@ -12,6 +13,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { AuthRoute, PrivateRoute } from "./Guard";
+import SimpleSlider from "common/components/Carousel/index";
 
 const Home = lazy(() => import("features/booking/pages/Home"));
 const Detail = lazy(() => import("features/booking/pages/Detail"));
@@ -31,11 +33,13 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+
       <Suspense fallback={<div>...</div>}>
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/booking" component={Booking} />
+          <Route path="/booking/:id" component={Booking} />
           <Route path="/detail/:id" component={Detail} />
+
           <AuthRoute path="/signin" component={Signin} redirectPath="/" />
           <AuthRoute path="/signup" component={Signup} redirectPath="/home" />
           <Route path="/payment" component={Payment} />
@@ -44,6 +48,7 @@ function App() {
           {/* <Redirect to="/" /> */}
         </Switch>
       </Suspense>
+      <Footer />
     </BrowserRouter>
   );
 }

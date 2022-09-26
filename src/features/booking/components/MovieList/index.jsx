@@ -13,17 +13,23 @@ function MovieList() {
       </div>
     );
   return (
-    <div className="container">
+    <div className="container" id="movieList" style={{ marginTop: 50 }}>
       <Row gutter={20}>
-        {movieInfo.items.map((item) => {
+        {movieInfo.items.map((item, index) => {
           return (
-            <Col key={item} xs={24} sm={12} md={8} lg={6} style= {{marginBottom: "20px"}}>
-              <MovieItem item={item}/>
+            <Col
+              key={index}
+              xs={24}
+              sm={12}
+              md={8}
+              lg={6}
+              style={{ marginBottom: "20px" }}
+            >
+              <MovieItem item={item} />
             </Col>
           );
         })}
       </Row>
-      
     </div>
   );
 }

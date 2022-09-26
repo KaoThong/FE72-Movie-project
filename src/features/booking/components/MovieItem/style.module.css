@@ -1,0 +1,4 @@
+.movieItem:hover {
+  transform: translateY(-15px);
+  transition: 0.5s;
+}

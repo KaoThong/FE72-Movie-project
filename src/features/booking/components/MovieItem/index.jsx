@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "antd";
 import { useHistory } from "react-router-dom";
+import style from "./style.module.css";
 
 const { Meta } = Card;
 
@@ -10,16 +11,19 @@ function MovieItem(props) {
 
   const goToDetail = () => {
     history.push("/detail/" + maPhim);
-  }
+  };
   return (
     <div>
       <Card
-      onClick={goToDetail}
+        className={style.movieItem}
+        style={{ height: 400, borderRadius: 7 }}
+        onClick={goToDetail}
         hoverable
         cover={
           <img
             style={{
-              height: 250,
+              borderRadius: 7,
+              height: 400,
               objectFit: "cover",
               objectPosition: "center top",
             }}
@@ -27,9 +31,7 @@ function MovieItem(props) {
             src={hinhAnh}
           />
         }
-      >
-        <Meta title={tenPhim} description={moTa.substr(0, 100) + "..."} />
-      </Card>
+      ></Card>
     </div>
   );
 }
