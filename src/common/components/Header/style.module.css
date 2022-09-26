@@ -39,6 +39,12 @@
 
 .active {
   color: black;
+  font-size: 20px;
+}
+
+.active i {
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .active:hover {
@@ -59,8 +65,8 @@
 
 .featured .item {
   margin: 0 15px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 400;
   color: black;
 }
 
@@ -76,10 +82,6 @@ a {
 
 a:hover {
   color: #333;
-}
-
-.active i {
-  font-size: 20px;
 }
 
 .btn {

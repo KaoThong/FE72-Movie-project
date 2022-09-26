@@ -45,9 +45,13 @@ function Header() {
     return (
       <>
         <NavLink activeClassName={styles.active} to="/signin">
-          Sign in
+          <i className={styles.icon} class="fa-regular fa-user"></i>
         </NavLink>
-        <NavLink activeClassName={styles.active} to="/signup">
+        <NavLink
+          style={{ fontSize: 16, fontWeight: 500 }}
+          activeClassName={styles.active}
+          to="/signup"
+        >
           Sign up
         </NavLink>
       </>
