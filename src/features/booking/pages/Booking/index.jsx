@@ -60,7 +60,7 @@ function Booking() {
   }, []);
 
   return (
-    <div style={{ paddingTop: 100 }}>
+    <div className={styles.background} style={{ paddingTop: 100 }}>
       <div className={styles.booking} style={{ marginBottom: 50 }}>
         <div className={styles.cinema}>
           <div className={styles.light}>

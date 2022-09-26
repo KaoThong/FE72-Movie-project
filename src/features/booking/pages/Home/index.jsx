@@ -50,7 +50,6 @@ function Home() {
           display: "flex",
           justifyContent: "center",
           marginTop: 40,
-          backgroundColor: "transparent",
         }}
         onChange={handleChangePage}
         current={config.currentPage}
