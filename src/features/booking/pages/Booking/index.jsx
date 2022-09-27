@@ -17,6 +17,8 @@ function Booking() {
   const [selectedSeat, setSelectedSeat] = useState([]);
   console.log(selectedSeat);
   const { lstSeat } = useSelector((state) => state.booking);
+  const [Sum, setSum] = useState(0);
+  let b = 0;
 
   const handleBookSeat = async () => {
     const danhSachVe = [];
@@ -51,6 +53,10 @@ function Booking() {
       newSel.splice(foundIndex, 1);
       setSelectedSeat(newSel);
     }
+    for (var i = 0; i < selectedSeat.length; i++) {
+      b += selectedSeat[i].giaVe;
+    }
+    setSum(b + 90000);
   };
 
   useEffect(() => {
@@ -190,7 +196,7 @@ function Booking() {
             </div>
           </div>
           <div className={styles.infor}>
-            <h2 className={styles.total}>Tổng tiền : 0Đ</h2>
+            <h2 className={styles.total}>Tổng tiền : {Sum}</h2>
             <h3
               className={styles.movie_name}
               style={{ fontSize: 20, color: "#f73c24" }}
